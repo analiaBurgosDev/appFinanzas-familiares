@@ -1,23 +1,29 @@
 /* =========================================================
    VARIABLES Y PALETA DE COLORES (FUCSIA + GRISES ELEGANTES)
    ========================================================= */
+/* =========================================================
+   PALETA DESATURADA Y SUAVE (OPTIMIZADA PARA PANTALLAS MÓVILES)
+   ========================================================= */
 :root {
-    --background:#e2a6e7;
-    --fuchsia-main: #d32665;      /* Fucsia elegante principal */
-    --fuchsia-dark: #bf0763;      /* Fucsia para estados hover/active */
-    --fuchsia-light: #fdf4ff;     /* Fondo fucsia suave */
-    --fuchsia-border: #f5d0fe;    /* Bordes delicados */
+    /* Fucsia elegante para acentos (Botones, bordes, íconos) */
+    --fuchsia-main: #be185d;      /* Fucsia profundo y elegante (sin brillo flúor) */
+    --fuchsia-dark: #9d174d;      /* Fucsia para el estado al presionar */
     
-    --bg-app: #f2ebeef4;            /* Gris claro de fondo general */
-    --card-bg: #ffffff;           /* Blanco puro para tarjetas */
+    /* Rosas pastel ultra suaves para fondos de realce */
+    --fuchsia-light: #fdf2f8;     /* Tinte rosado ultra claro para tarjetas destacadas */
+    --fuchsia-border: #fbcfe8;    /* Borde rosado muy sutil */
     
-    --text-primary: #1e293b;      /* Gris oscuro muy legible (sin usar negro puro) */
-    --text-secondary: #64748b;    /* Gris medio para etiquetas */
-    --border-color: #e2e8f0;      /* Bordes sutiles en grises */
+    /* Fondos neutros para no cansar la vista */
+    --bg-app: #f8fafc;            /* Gris neutro apagado para el fondo de pantalla */
+    --card-bg: #ffffff;           /* Blanco puro para las tarjetas */
+    
+    /* Tipografía legible */
+    --text-primary: #1e293b;      /* Gris oscuro principal */
+    --text-secondary: #64748b;    /* Gris medio para textos secundarios */
+    --border-color: #e2e8f0;      /* Bordes neutros sutiles */
 
     --font-main: 'Outfit', sans-serif;
 }
-
 * {
     box-sizing: border-box;
     margin: 0;
