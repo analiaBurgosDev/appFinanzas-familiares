@@ -3,12 +3,12 @@
    ========================================================= */
 :root {
     --background:#e2a6e7;
-    --fuchsia-main: #c026d3;      /* Fucsia elegante principal */
-    --fuchsia-dark: #86198f;      /* Fucsia para estados hover/active */
+    --fuchsia-main: #d32665;      /* Fucsia elegante principal */
+    --fuchsia-dark: #bf0763;      /* Fucsia para estados hover/active */
     --fuchsia-light: #fdf4ff;     /* Fondo fucsia suave */
     --fuchsia-border: #f5d0fe;    /* Bordes delicados */
     
-    --bg-app: #edcbdffe;            /* Gris claro de fondo general */
+    --bg-app: #f2ebeef4;            /* Gris claro de fondo general */
     --card-bg: #ffffff;           /* Blanco puro para tarjetas */
     
     --text-primary: #1e293b;      /* Gris oscuro muy legible (sin usar negro puro) */
@@ -135,7 +135,7 @@ body {
 }
 
 .mini-card span {
-    font-size: 0.72rem;
+    font-size: 0.90rem;
     color: var(--text-secondary);
     font-weight: 500;
 }
