@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzas Familiares ✨</title>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8a2be2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- FontAwesome para Íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PANTALLA DE LOGIN -->
+<div id="login-screen" class="card" style="max-width: 380px; margin: 40px auto; text-align: center;">
+    <h3><i class="fa-solid fa-lock"></i> Acceso Privado</h3>
+    <form id="form-login" style="margin-top: 15px;">
+        <input type="email" id="login-email" placeholder="Correo electrónico" required>
+        <input type="password" id="login-password" placeholder="Contraseña" required>
+        <button type="submit" class="btn btn-ingreso btn-bounce" style="margin-top: 10px;">
+            <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
+        </button>
+    </form>
+</div>
+
+    <div class="app-container">
+        <!-- HEADER -->
+        <header class="app-header">
+            <h2><i class="fa-solid fa-piggy-bank"></i> Finanzas Familiares ✨</h2>
+        <button id="btn-logout" class="btn-logout hidden" title="Cerrar Sesión">
+        <i class="fa-solid fa-right-from-bracket"></i> Salir
+    </button>
+        </header>
+
+        <!-- SELECTOR GLOBAL DE MES (NAVEGADOR DE CUADERNO) -->
+        <div class="mes-selector-bar">
+            <label for="select-mes-global">
+                <i class="fa-solid fa-calendar-days"></i> Viendo período:
+            </label>
+            <input type="month" id="select-mes-global" class="input-select-mes">
+        </div>
+
+        <!-- NAVEGACIÓN TIPO SOLAPAS -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-tab="tab-produccion">
+                <i class="fa-solid fa-chart-line"></i> Producción & DD
+            </button>
+            <button class="tab-btn" data-tab="tab-familia">
+                <i class="fa-solid fa-house-heart"></i> Gastos Familia
+            </button>
+            <button class="tab-btn" data-tab="tab-resumen">
+                <i class="fa-solid fa-calculator"></i> Gran Resumen & Caja
+            </button>
+        </nav>
+
+        <!-- CONTENIDOS DE PESTAÑAS -->
+        <main class="content-area">
+            
+            <!-- PESTAÑA 1: PRODUCCIÓN Y DD -->
+            <section id="tab-produccion" class="tab-content active">
+                
+                <!-- RESUMEN EN TIEMPO REAL -->
+                <div class="resumen-mini-grid">
+                    <div class="mini-card bg-purple">
+                        <span>Ingresos Brutos:</span>
+                        <strong id="tot-ingresos-bruto">$0.00</strong>
+                    </div>
+                    <div class="mini-card bg-pink">
+                        <span>Gastos Producción:</span>
+                        <strong id="tot-gastos-prod">$0.00</strong>
+                    </div>
+                    <div class="mini-card bg-fuchsia">
+                        <span>Ingreso Neto:</span>
+                        <strong id="tot-ingreso-neto">$0.00</strong>
+                    </div>
+                    <div class="mini-card bg-violet">
+                        <span>DD :</span>
+                        <strong id="tot-diezmo-sugerido">$0.00</strong>
+                    </div>
+                    <div class="mini-card bg-orange">
+                        <span>DD Pendiente:</span>
+                        <strong id="tot-diezmo-pendiente">$0.00</strong>
+                    </div>
+                </div>
+
+                <div class="forms-grid">
+                    <!-- Columna 1: Ingreso Producción -->
+                    <div class="card card-ingreso">
+                        <h3><i class="fa-solid fa-circle-plus"></i> Ingresos (Brutos)</h3>
+                        <form id="form-ingreso-prod">
+                            <input type="date" id="ingreso-fecha" required>
+                            <input type="text" id="ingreso-concepto" placeholder="Concepto (ej: Venta)" required>
+                            <input type="number" step="0.01" id="ingreso-monto" placeholder="Monto $" required>
+                            <button type="submit" class="btn btn-ingreso btn-bounce">
+                                <i class="fa-solid fa-sparkles"></i> Añadir Ingreso
+                            </button>
+                        </form>
+                        
+                        <!-- Lista de Ingresos -->
+                        <div class="list-container">
+                            <h4>Historial de Ingresos</h4>
+                            <ul id="lista-ingresos" class="data-list"></ul>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Gasto Producción -->
+                    <div class="card card-egreso">
+                        <h3><i class="fa-solid fa-circle-minus"></i> Gastos de Producción</h3>
+                        <form id="form-gasto-prod">
+                            <input type="date" id="gasto-prod-fecha" required>
+                            <input type="text" id="gasto-prod-concepto" placeholder="Concepto (ej: Insumos)" required>
+                            <input type="number" step="0.01" id="gasto-prod-monto" placeholder="Monto $" required>
+                            <button type="submit" class="btn btn-egreso btn-bounce">
+                                <i class="fa-solid fa-receipt"></i> Registrar Gasto
+                            </button>
+                        </form>
+
+                        <!-- Lista de Gastos de Producción -->
+                        <div class="list-container">
+                            <h4>Historial de Gastos Prod.</h4>
+                            <ul id="lista-gastos-prod" class="data-list"></ul>
+                        </div>
+                    </div>
+
+                    <!-- Columna 3: Diezmo Entregado -->
+                    <div class="card card-diezmo">
+                        <h3><i class="fa-solid fa-hand-holding-heart"></i> Entregas de DD</h3>
+                        <form id="form-diezmo">
+                            <input type="date" id="diezmo-fecha" required>
+                            <input type="text" id="diezmo-concepto" placeholder="Detalle / Nota" required>
+                            <input type="number" step="0.01" id="diezmo-monto" placeholder="Monto Entregado $" required>
+                            <button type="submit" class="btn btn-diezmo btn-bounce">
+                                <i class="fa-solid fa-heart"></i> Registrar DD
+                            </button>
+                        </form>
+
+                        <!-- Lista de Diezmos -->
+                        <div class="list-container">
+                            <h4>DD Entregados</h4>
+                            <ul id="lista-diezmos" class="data-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 2: GASTOS FAMILIARES -->
+            <section id="tab-familia" class="tab-content">
+                
+                <!-- TARJETAS DE TOTALES PRINCIPALES -->
+                <div class="resumen-mini-grid">
+                    <div class="mini-card bg-red">
+                        <span>Total Gastos Familia:</span>
+                        <strong id="tot-gastos-familia">$0.00</strong>
+                    </div>
+                    <div class="mini-card bg-orange">
+                        <span>🛒 Alimentos:</span>
+                        <strong id="tot-gasto-alimentos">$0.00</strong>
+                    </div>
+                    <div class="mini-card bg-cyan">
+                        <span>💡 Cuentas y Serv.:</span>
+                        <strong id="tot-gasto-cuentas">$0.00</strong>
+                    </div>
+                    <div class="mini-card bg-fuchsia">
+                        <span>🎁 Gastos Varios:</span>
+                        <strong id="tot-gasto-varios">$0.00</strong>
+                    </div>
+                </div>
+
+                <div class="card card-gastos-fam">
+                    <h3><i class="fa-solid fa-cart-shopping"></i> Registrar Gasto Familiar</h3>
+                    <form id="form-gasto-fam">
+                        <input type="date" id="fam-fecha" required>
+                        
+                        <select id="fam-categoria" required>
+                            <option value="" disabled selected>Seleccionar Categoría...</option>
+                            <option value="Alimentos">🛒 Alimentos</option>
+                            <option value="Cuentas y Servicios">💡 Cuentas y Servicios</option>
+                            <option value="Gastos por Hijo">👶 Gastos por Hijo</option>
+                            <option value="Combustible / Transporte">⛽ Combustible / Nafta</option>
+                            <option value="Limpieza y Hogar">🧹 Limpieza e Higiene</option>
+                            <option value="Farmacia y Salud">💊 Farmacia y Salud</option>
+                            <option value="Varios">🎁 Varios</option>
+                        </select>
+
+                        <!-- Subcategoría desplegable para los chicos -->
+                        <div id="subcat-hijos-group" class="hidden">
+                            <label><i class="fa-solid fa-child-reaching"></i> ¿Para quién es el gasto?:</label>
+                            <select id="fam-subcategoria">
+                                <option value="Benja">👦 Benja</option>
+                                <option value="Yaz">👧 Yaz</option>
+                                <option value="Estrella">👧 Estrella</option>
+                            </select>
+                        </div>
+
+                        <input type="text" id="fam-concepto" placeholder="Detalle (ej: Zapato, Supermercado...)" required>
+                        <input type="number" step="0.01" id="fam-monto" placeholder="Monto $" required>
+                        
+                        <button type="submit" class="btn btn-fam btn-bounce">
+                            <i class="fa-solid fa-plus-circle"></i> Guardar Gasto Familiar
+                        </button>
+                    </form>
+
+                    <!-- LISTA DE GASTOS FAMILIARES -->
+                    <div class="list-container">
+                        <h4>Historial de Gastos Familiares</h4>
+                        <ul id="lista-gastos-fam" class="data-list"></ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 3: GRAN RESUMEN Y CAJA -->
+            <section id="tab-resumen" class="tab-content">
+                
+                <!-- BLOQUE 1: PRODUCCIÓN Y DIEZMO -->
+                <div class="card card-resumen-seccion">
+                    <h3><i class="fa-solid fa-industry"></i> 1. Balance de Producción y DD</h3>
+                    <div class="resumen-detalle-grid">
+                        <div class="item-linea"><span>Ingresos Brutos:</span><strong id="res-ing-bruto">$0.00</strong></div>
+                        <div class="item-linea"><span>Gastos Producción:</span><strong id="res-gast-prod" class="text-red">-$0.00</strong></div>
+                        <div class="item-linea destacado"><span>Ingreso Neto:</span><strong id="res-ing-neto">$0.00</strong></div>
+                        <div class="item-linea"><span>DD Calculado (10%):</span><strong id="res-dd-calc" class="text-purple">$0.00</strong></div>
+                        <div class="item-linea"><span>DD Entregado:</span><strong id="res-dd-entregado">$0.00</strong></div>
+                        <div class="item-linea destacado-purple"><span>Ingreso Líquido Disponible:</span><strong id="res-ing-liquido">$0.00</strong></div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 2: GASTOS FAMILIARES DETALLADOS -->
+                <div class="card card-resumen-seccion">
+                    <h3><i class="fa-solid fa-basket-shopping"></i> 2. Desglose Gastos Familiares</h3>
+                    <div class="resumen-detalle-grid">
+                        <div class="item-linea"><span>🛒 Alimentos:</span><strong id="res-fam-alimentos">-$0.00</strong></div>
+                        <div class="item-linea"><span>💡 Cuentas y Servicios:</span><strong id="res-fam-cuentas">-$0.00</strong></div>
+                        <div class="item-linea"><span>👦 Benja:</span><strong id="res-fam-benja">-$0.00</strong></div>
+                        <div class="item-linea"><span>👧 Yaz:</span><strong id="res-fam-yaz">-$0.00</strong></div>
+                        <div class="item-linea"><span>👧 Estrella:</span><strong id="res-fam-estrella">-$0.00</strong></div>
+                        <div class="item-linea"><span>🎁 Gastos Varios:</span><strong id="res-fam-varios">-$0.00</strong></div>
+                        <div class="item-linea destacado-red"><span>Total Gastos Familia:</span><strong id="res-fam-total">-$0.00</strong></div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 3: BALANCE GENERAL, CAJA Y AHORROS -->
+                <div class="card card-resumen-final">
+                    <h3><i class="fa-solid fa-piggy-bank"></i> 3. Estado de Caja y Ahorros</h3>
+                    <div class="resumen-detalle-grid">
+                        <div class="item-linea">
+                            <span>Ahorro del Mes (Disponible):</span>
+                            <strong id="res-ahorro-mes">$0.00</strong>
+                        </div>
+                        
+                        <div class="item-linea">
+                            <span>Ahorro Acumulado Anterior:</span>
+                            <div>
+                                <strong id="res-ahorro-anterior">$0.00</strong>
+                                <button id="btn-editar-ahorro" class="btn-icon-edit" title="Editar Ahorro Acumulado">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="item-linea destacado-green">
+                            <span>💰 Caja Libre Total (Tu Plata):</span>
+                            <strong id="res-caja-libre">$0.00</strong>
+                        </div>
+
+                        <div class="item-linea destacado-orange">
+                            <span>🙏 Ahorro DD (En Reserva / Pendiente):</span>
+                            <strong id="res-ahorro-dd">$0.00</strong>
+                        </div>
+
+                        <div class="item-linea super-destacado">
+                            <span>💵 TOTAL DINERO FÍSICO EN MANO:</span>
+                            <strong id="res-total-fisico">$0.00</strong>
+                        </div>
+                    </div>
+
+                    <!-- BOTÓN DE CIERRE DE MES -->
+                    <div class="cierre-mes-container">
+                        <button id="btn-reiniciar-mes" class="btn btn-cierre btn-bounce">
+                            <i class="fa-solid fa-calendar-check"></i> Cerrar y Reiniciar Mes
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Llamadas modulares en orden -->
+    <script src="supabaseClient.js"></script>
+    <script src="api.js"></script>
+    <script src="app2.js"></script>
+</body>
+</html>
