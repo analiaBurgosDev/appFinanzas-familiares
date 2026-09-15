@@ -6,8 +6,8 @@
    ========================================================= */
 :root {
     /* Fucsia elegante para acentos (Botones, bordes, íconos) */
-    --fuchsia-main: #be185d;      /* Fucsia profundo y elegante (sin brillo flúor) */
-    --fuchsia-dark: #9d174d;      /* Fucsia para el estado al presionar */
+    --fuchsia-main: #e74181;      /* Fucsia profundo y elegante (sin brillo flúor) */
+    --fuchsia-dark: #a50545;      /* Fucsia para el estado al presionar */
     
     /* Rosas pastel ultra suaves para fondos de realce */
     --fuchsia-light: #fdf2f8;     /* Tinte rosado ultra claro para tarjetas destacadas */
