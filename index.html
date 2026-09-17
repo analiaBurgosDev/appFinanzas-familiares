@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Finanzas Familiares ✨</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#c026d3">
+    <meta name="theme-color" content="#e74181">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -144,26 +144,29 @@
             </section>
 
             <!-- PESTAÑA 4: GASTOS FAMILIARES -->
+           <!-- PESTAÑA 4: GASTOS FAMILIARES -->
             <section id="tab-familia" class="tab-content">
+                <!-- Tarjetas de Resumen en Grilla de 2 columnas flexible -->
                 <div class="resumen-mini-grid fam-grid-summary">
                     <div class="mini-card bg-red">
                         <span>Total Gastos Fam.</span>
                         <strong id="tot-gastos-familia">$0.00</strong>
                     </div>
                     <div class="mini-card">
-                        <span>🛒 Alimentos</span>
+                        <span><i class="fa-solid fa-basket-shopping"></i> Alimentos</span>
                         <strong id="tot-gasto-alimentos">$0.00</strong>
                     </div>
                     <div class="mini-card">
-                        <span>💡 Cuentas / Serv.</span>
+                        <span><i class="fa-solid fa-lightbulb"></i> Cuentas / Serv.</span>
                         <strong id="tot-gasto-cuentas">$0.00</strong>
                     </div>
                     <div class="mini-card">
-                        <span>🎁 Varios</span>
+                        <span><i class="fa-solid fa-gift"></i> Varios</span>
                         <strong id="tot-gasto-varios">$0.00</strong>
                     </div>
-                </div>
+                </div> <!-- <-- ACÁ FALTABA CERRAR ESTE DIV -->
 
+                <!-- Formulario de Registro de Gastos Familiares -->
                 <div class="card card-gastos-fam">
                     <h3><i class="fa-solid fa-cart-shopping text-fuchsia"></i> Registrar Gasto Familiar</h3>
                     <form id="form-gasto-fam">
@@ -171,21 +174,21 @@
                         
                         <select id="fam-categoria" required>
                             <option value="" disabled selected>Seleccionar Categoría...</option>
-                            <option value="Alimentos">🛒 Alimentos</option>
-                            <option value="Cuentas y Servicios">💡 Cuentas y Servicios</option>
-                            <option value="Gastos por Hijo">👶 Gastos por Hijo</option>
-                            <option value="Combustible / Transporte">⛽ Combustible / Nafta</option>
-                            <option value="Limpieza y Hogar">🧹 Limpieza e Higiene</option>
-                            <option value="Farmacia y Salud">💊 Farmacia y Salud</option>
-                            <option value="Varios">🎁 Varios</option>
+                            <option value="Alimentos">Alimentos</option>
+                            <option value="Cuentas y Servicios">Cuentas y Servicios</option>
+                            <option value="Gastos por Hijo">Gastos por Hijo</option>
+                            <option value="Combustible / Transporte">Combustible / Nafta</option>
+                            <option value="Limpieza y Hogar">Limpieza e Higiene</option>
+                            <option value="Farmacia y Salud">Farmacia y Salud</option>
+                            <option value="Varios">Varios</option>
                         </select>
 
                         <div id="subcat-hijos-group" class="hidden">
                             <label><i class="fa-solid fa-child-reaching"></i> ¿Para quién es el gasto?:</label>
                             <select id="fam-subcategoria">
-                                <option value="Benja">👦 Benja</option>
-                                <option value="Yaz">👧 Yaz</option>
-                                <option value="Estrella">👧 Estrella</option>
+                                <option value="Benja">Benja</option>
+                                <option value="Yaz">Yaz</option>
+                                <option value="Estrella">Estrella</option>
                             </select>
                         </div>
 
@@ -203,6 +206,7 @@
                     </div>
                 </div>
             </section>
+         </section>
 
             <!-- PESTAÑA 5: GRAN RESUMEN -->
             <section id="tab-resumen" class="tab-content">
@@ -222,16 +226,15 @@
                 <!-- BLOQUE 2: GASTOS FAMILIARES DETALLADOS -->
                 <div class="card card-resumen-seccion">
                     <h3><i class="fa-solid fa-basket-shopping text-fuchsia"></i> 2. Desglose Gastos Familiares</h3>
-                    <div class="resumen-detalle-grid">
-                        <div class="item-linea"><span>🛒 Alimentos:</span><strong id="res-fam-alimentos">-$0.00</strong></div>
-                        <div class="item-linea"><span>💡 Cuentas y Servicios:</span><strong id="res-fam-cuentas">-$0.00</strong></div>
-                        <div class="item-linea"><span>👦 Benja:</span><strong id="res-fam-benja">-$0.00</strong></div>
-                        <div class="item-linea"><span>👧 Yaz:</span><strong id="res-fam-yaz">-$0.00</strong></div>
-                        <div class="item-linea"><span>👧 Estrella:</span><strong id="res-fam-estrella">-$0.00</strong></div>
-                        <div class="item-linea"><span>🎁 Gastos Varios:</span><strong id="res-fam-varios">-$0.00</strong></div>
-                        <div class="item-linea destacado-red"><span>Total Gastos Familia:</span><strong id="res-fam-total">-$0.00</strong></div>
-                    </div>
-                </div>
+<div class="resumen-detalle-grid">
+    <div class="item-linea"><span><i class="fa-solid fa-basket-shopping"></i> Alimentos:</span><strong id="res-fam-alimentos">-$0.00</strong></div>
+    <div class="item-linea"><span><i class="fa-solid fa-lightbulb"></i> Cuentas y Servicios:</span><strong id="res-fam-cuentas">-$0.00</strong></div>
+    <div class="item-linea"><span><i class="fa-solid fa-child"></i> Benja:</span><strong id="res-fam-benja">-$0.00</strong></div>
+    <div class="item-linea"><span><i class="fa-solid fa-child-dress"></i> Yaz:</span><strong id="res-fam-yaz">-$0.00</strong></div>
+    <div class="item-linea"><span><i class="fa-solid fa-child-dress"></i> Estrella:</span><strong id="res-fam-estrella">-$0.00</strong></div>
+    <div class="item-linea"><span><i class="fa-solid fa-gift"></i> Gastos Varios:</span><strong id="res-fam-varios">-$0.00</strong></div>
+    <div class="item-linea destacado-red"><span><i class="fa-solid fa-calculator"></i> Total Gastos Familia:</span><strong id="res-fam-total">-$0.00</strong></div>
+</div>                </div>
 
                 <!-- BLOQUE 3: BALANCE GENERAL Y CAJA -->
                 <div class="card card-resumen-final">
@@ -252,21 +255,20 @@
                             </div>
                         </div>
 
-                        <div class="item-linea destacado-green">
-                            <span>💰 Caja Libre Total (Tu Plata):</span>
-                            <strong id="res-caja-libre">$0.00</strong>
-                        </div>
+                     <div class="item-linea destacado-green">
+    <span><i class="fa-solid fa-vault"></i> Caja Libre Total (Tu Plata):</span>
+    <strong id="res-caja-libre">$0.00</strong>
+</div>
+                    <div class="item-linea destacado-orange">
+    <span><i class="fa-solid fa-hands-praying"></i> Ahorro DD (En Reserva / Pendiente):</span>
+    <strong id="res-ahorro-dd">$0.00</strong>
+</div>
 
-                        <div class="item-linea destacado-orange">
-                            <span>🙏 Ahorro DD (En Reserva / Pendiente):</span>
-                            <strong id="res-ahorro-dd">$0.00</strong>
-                        </div>
-
-                        <div class="item-linea super-destacado">
-                            <span>💵 TOTAL DINERO FÍSICO EN MANO:</span>
-                            <strong id="res-total-fisico">$0.00</strong>
-                        </div>
-                    </div>
+<div class="item-linea super-destacado">
+    <span><i class="fa-solid fa-money-bill-wave"></i> TOTAL DINERO FÍSICO EN MANO:</span>
+    <strong id="res-total-fisico">$0.00</strong>
+</div>
+ </div>
 
                     <!-- BOTÓN DE CIERRE DE MES -->
                     <div class="cierre-mes-container">
@@ -291,7 +293,7 @@
             </button>
             <button class="nav-btn" data-tab="tab-diezmo">
                 <i class="fa-solid fa-hand-holding-heart"></i>
-                <span>Diezmo</span>
+                <span>Donacion</span>
             </button>
             <button class="nav-btn" data-tab="tab-familia">
                 <i class="fa-solid fa-house"></i>
