@@ -199,3 +199,30 @@ async function dbObtenerUsuarioActual() {
     const { data } = await supabaseClient.auth.getUser();
     return data?.user || null;
 }
+
+// Busca gastos familiares por concepto o categoría en un rango amplio de fechas
+async function dbBuscarGastosAvanzado(fechaInicio, fechaFin, categoria, conceptoBusqueda) {
+    let query = supabaseClient
+        .from('gastos_familiares')
+        .select('*')
+        .gte('fecha', fechaInicio)
+        .lte('fecha', fechaFin)
+        .order('fecha', { ascending: false });
+
+    // Filtro opcional por categoría
+    if (categoria && categoria !== 'TODAS') {
+        query = query.eq('categoria', categoria);
+    }
+
+    // Filtro opcional por coincidencia de texto en el concepto (ej: "nafta", "peaje")
+    if (conceptoBusqueda && conceptoBusqueda.trim() !== '') {
+        query = query.ilike('concepto', `%${conceptoBusqueda.trim()}%`);
+    }
+
+    const { data, error } = await query;
+    if (error) {
+        console.error("Error al buscar gastos:", error);
+        return [];
+    }
+    return data || [];
+}

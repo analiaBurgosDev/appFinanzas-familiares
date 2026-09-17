@@ -470,3 +470,46 @@ function animarGuardadoExito(formElement) {
         card.classList.add('exito-pulse');
     }
 }
+
+document.getElementById('btn-ejecutar-busqueda')?.addEventListener('click', async () => {
+    const concepto = document.getElementById('filtro-concepto').value;
+    const categoria = document.getElementById('filtro-categoria').value;
+    const mesesAtras = parseInt(document.getElementById('filtro-periodo').value, 10);
+
+    // Calcular rango de fechas (Desde hace N meses hasta hoy)
+    const hoy = new Date();
+    const fechaFin = hoy.toISOString().split('T')[0];
+    
+    const fechaInicioObj = new Date(hoy.getFullYear(), hoy.getMonth() - (mesesAtras - 1), 1);
+    const fechaInicio = fechaInicioObj.toISOString().split('T')[0];
+
+    // Consultar a Supabase
+    const resultados = await dbBuscarGastosAvanzado(fechaInicio, fechaFin, categoria, concepto);
+
+    // Calcular Total y armar lista
+    let totalGeneral = 0;
+    const listaUI = document.getElementById('lista-busqueda-resultados');
+    listaUI.innerHTML = '';
+
+    if (resultados.length === 0) {
+        listaUI.innerHTML = '<li><span>No se encontraron registros.</span></li>';
+        document.getElementById('res-busqueda-total').textContent = '$0.00';
+    } else {
+        resultados.forEach(item => {
+            totalGeneral += parseFloat(item.monto);
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div>
+                    <strong>${item.concepto}</strong> <small>(${item.categoria})</small><br>
+                    <span class="fecha"><i class="fa-regular fa-calendar"></i> ${item.fecha}</span>
+                </div>
+                <strong class="text-red">-$${parseFloat(item.monto).toLocaleString('es-AR', {minimumFractionDigits: 2})}</strong>
+            `;
+            listaUI.appendChild(li);
+        });
+
+        document.getElementById('res-busqueda-total').textContent = `$${totalGeneral.toLocaleString('es-AR', {minimumFractionDigits: 2})}`;
+    }
+
+    document.getElementById('resultado-busqueda-container').classList.remove('hidden');
+});

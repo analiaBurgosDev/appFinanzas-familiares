@@ -269,7 +269,12 @@
     <strong id="res-total-fisico">$0.00</strong>
 </div>
  </div>
-
+<!-- BOTÓN DE IMPRESIÓN / EXPORTAR PDF -->
+<div class="impresion-container">
+    <button onclick="window.print()" class="btn btn-outline-fuchsia btn-bounce">
+        <i class="fa-solid fa-print"></i> Imprimir / Guardar Reporte PDF
+    </button>
+</div>
                     <!-- BOTÓN DE CIERRE DE MES -->
                     <div class="cierre-mes-container">
                         <button id="btn-reiniciar-mes" class="btn btn-cierre btn-bounce">
@@ -277,7 +282,53 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- BLOQUE DE BÚSQUEDA Y FILTROS AVANZADOS -->
+<div class="card card-busqueda-avanzada">
+    <h3><i class="fa-solid fa-magnifying-glass text-fuchsia"></i> Consulta y Filtros Avanzados</h3>
+    
+    <div class="form-busqueda-grid">
+        <label><i class="fa-solid fa-filter"></i> Palabra Clave / Concepto:</label>
+        <input type="text" id="filtro-concepto" placeholder="Ej: Nafta, Peaje, YPF, Farmacia...">
+
+        <label><i class="fa-solid fa-folder-tree"></i> Categoría:</label>
+        <select id="filtro-categoria">
+            <option value="TODAS">Todas las categorías</option>
+            <option value="Alimentos">Alimentos</option>
+            <option value="Cuentas y Servicios">Cuentas y Servicios</option>
+            <option value="Gastos por Hijo">Gastos por Hijo</option>
+            <option value="Combustible / Transporte">Combustible / Nafta</option>
+            <option value="Limpieza y Hogar">Limpieza e Higiene</option>
+            <option value="Farmacia y Salud">Farmacia y Salud</option>
+            <option value="Varios">Varios</option>
+        </select>
+
+        <label><i class="fa-solid fa-clock-rotate-left"></i> Período de Tiempo:</label>
+        <select id="filtro-periodo">
+            <option value="1">Mes actual</option>
+            <option value="3" selected>Últimos 3 meses</option>
+            <option value="6">Últimos 6 meses</option>
+            <option value="12">Año completo</option>
+        </select>
+
+        <button id="btn-ejecutar-busqueda" class="btn btn-fuchsia btn-bounce">
+            <i class="fa-solid fa-search"></i> Buscar y Calcular
+        </button>
+    </div>
+
+    <!-- RESULTADO DE LA BÚSQUEDA -->
+    <div id="resultado-busqueda-container" class="resultado-busqueda hidden">
+        <div class="item-linea super-destacado">
+            <span><i class="fa-solid fa-coins"></i> TOTAL ENCONTRADO:</span>
+            <strong id="res-busqueda-total">$0.00</strong>
+        </div>
+
+        <h4>Desglose de Coincidencias:</h4>
+        <ul id="lista-busqueda-resultados" class="data-list"></ul>
+    </div>
+
             </section>
+</div>
 
         </main>
 
