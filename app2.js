@@ -47,17 +47,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loginScreen = document.getElementById('login-screen');
     const appContainer = document.querySelector('.app-container');
     const btnLogout = document.getElementById('btn-logout');
+    const bottomNav = document.querySelector('.bottom-nav'); // <-- AQUÍ SE CAPTURA LA BARRA
 
     if (!usuario) {
         // Si NO hay sesión activa: mostramos login, ocultamos app
         if (loginScreen) loginScreen.classList.remove('hidden');
         if (appContainer) appContainer.classList.add('hidden');
         if (btnLogout) btnLogout.classList.add('hidden');
+        if (bottomNav) bottomNav.classList.add('hidden'); // <-- AQUÍ SE OCULTA LA BARRA
     } else {
         // Si HAY sesión activa: ocultamos login, mostramos app
         if (loginScreen) loginScreen.classList.add('hidden');
         if (appContainer) appContainer.classList.remove('hidden');
         if (btnLogout) btnLogout.classList.remove('hidden');
+        if (bottomNav) bottomNav.classList.remove('hidden'); // <-- AQUÍ SE MUESTRA LA BARRA
 
         // Carga inicial de datos desde la base de datos
         cargarDatosProduccion();

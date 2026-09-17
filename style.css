@@ -663,3 +663,9 @@ input:focus, select:focus {
 .btn-outline-fuchsia i {
     color: var(--fuchsia-main) !important;
 }
+
+/* Si la pantalla de login NO tiene la clase .hidden, oculta la barra completa */
+#login-screen:not(.hidden) ~ .app-container .bottom-nav,
+body:has(#login-screen:not(.hidden)) .bottom-nav {
+    display: none !important;
+}
