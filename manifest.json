@@ -1,22 +1,36 @@
 {
   "short_name": "Finanzas",
   "name": "Finanzas Familiares ✨",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/2953/2953363.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/2953/2953363.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
+  "id": "./",
   "start_url": "./index.html",
-  "background_color": "fbcfe8",
+  "background_color": "#fbcfe8",
   "theme_color": "#e74181",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./hucha.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./hucha.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./hucha.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./hucha.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
